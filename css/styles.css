@@ -2,8 +2,9 @@
    max-width: 350px;
    padding: 1rem;
    background-color: rgb(49, 49, 49);
-   color: white;
+   color: rgb(213, 69, 218);
    box-shadow: 5000px;
+   border-radius: 9px;
 }
 
 h1{
