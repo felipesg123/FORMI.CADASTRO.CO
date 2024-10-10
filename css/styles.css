@@ -1,2 +1,13 @@
+.form-container{
+   max-width: 350px;
+   padding: 1rem;
+   background-color: rgb(49, 49, 49);
+   color: white;
+   box-shadow: 5000px;
+}
 
+h1{
+    font-family: arial  bold;
+    width: 110px;
+}
 
