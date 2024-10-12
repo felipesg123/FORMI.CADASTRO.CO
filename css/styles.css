@@ -1,14 +1,39 @@
-.form-container{
-   max-width: 350px;
-   padding: 1rem;
-   background-color: rgb(49, 49, 49);
-   color: rgb(213, 69, 218);
-   box-shadow: 5000px;
-   border-radius: 9px;
+body {
+    background-color: rgb(0, 0, 0); /* Define o fundo como preto */
+    height: 100vh;          /* Garante que o fundo cubra toda a altura da página */
+    margin: 0;
+    padding: 0;
 }
 
-h1{
-    font-family: arial  bold;
-    width: 110px;
+.form-container {
+   max-width: 350px;
+   padding: 1rem;
+   background-color: rgba(21, 21, 21, 0.8); /* Fundo com transparência */
+   color: rgb(140, 16, 222);
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+   border-radius: 9px;
+   margin-top: 50px;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #fff; /* Mantém o texto branco para contraste */
+    margin-bottom: 20px;
+}
+
+/* Estilo para o botão */
+button {
+    background-color: #be25ff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4b0772;
 }
 
