@@ -1,23 +1,18 @@
-form{
-    width: 50px;
-    position: relative;
-    left: 500px;
-    top: 80px;
-    color: blueviolet;
-    
-}
-
-p{
-    width: 500px;
-    position: relative;
-    left: 500px;
-    top: 80px;  
-   color:blueviolet;
-   background-color: rgb(195, 195, 195);
-   width: 100px;
-}
-
-body{
-    width: 400px;
-    background-color: rgb(50, 50, 50);
-}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    background-color: #a70564; /* Cor de fundo da página */
+  }
+  
+  body {
+    width: 80%; /* Defina a largura que desejar para o body */
+    height: 90%; /* Defina a altura do body */
+    background-color: #a84d4d; /* Cor de fundo do body */
+    border-radius: 20px; /* Arredonda os cantos do body */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Adiciona sombra ao redor do body */
+    padding: 50px; /* Espaçamento interno */
+    box-sizing: border-box; /* Garante que o padding seja incluído na largura/altura */
+  }

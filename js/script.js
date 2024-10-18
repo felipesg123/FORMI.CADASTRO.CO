@@ -1,113 +1,45 @@
-// CÓDGO DE VALIDAÇÃO DO EMAIL
-// ----------------------------------------------------------
-function checarEmail(){
-    if(document.forms[0].email.value == "" ||
-       document.forms[0].email.value.indexOf('@') == -1 ||
-       document.forms[0].email.value.indexOf('.') == -1){
-        alert("Por favor, informar um e-mail válido");
-        return false;
+'use strict'; // Ativa o modo restrito
+// Código para consumo de API da ViaCEP
+//https://viacep.com.br/
+ 
+ 
+// Limpar consulta do form já realizada
+const limparFormulario = () =>{
+    document.getElementById('inputRua').value = '';
+    document.getElementById('inputbairro').value = '';
+    document.getElementById('inputcidade').value = '';
+    document.getElementById('inputestado').value = '';
+}
+ 
+//Função para preencher campos relacionados ao CEP
+const preencherFormulario = (endereco) =>{
+    document.getElementById('inputRua').value = endereco.logradouro; // Coloca o valor de logradouro da API dentro do campo logradouro do formulário
+    document.getElementById('inputbairro').value = endereco.bairro;
+    document.getElementById('inputcidade').value = endereco.localidade;
+    document.getElementById('inputestado').value = endereco.uf;
+}
+ 
+// Verifica se o CEP é válido
+const eNumero = (numero) => /^[0-9]+$/.test(numero); // Expressão regular
+// Verifica o tamanho do CEP
+const cepValido = (cep) => cep.length == 8 && eNumero(cep);
+ 
+// Função para consumo de API ViaCEP
+const pesquisarCep = async() => {
+    limparFormulario();
+    const url = `http://viacep.com.br/ws/${inputcep.value}/json/`;
+    if(cepValido(inputcep.value)){
+        const dados     = await fetch(url);
+        const addres    = await dados.json();
+ 
+        if(addres.hasOwnProperty('erro')){
+            alert('CEP não encontrado');
+        }else{
+            preencherFormulario(addres);
+        }    
     }else{
-            alert("Email informado");
-            document.getElementById('email').innerHTML = document.forms[0].email.value;
-        }
+        alert('CEP Incorreto');
     }
-     
-     
-     
-     
-     
-    // ----------------------------------------------------------
-     
-     
-    // CÓDIGO DE VERIFICAÇÃO DO EMAIL DIGITADO
-    // ----------------------------------------------------------
-     
-     
-     
-    // ----------------------------------------------------------
-
-
-
-// adiciona a validação de cpf 
-   
- // VALIDAÇÃO DE CPF DIRETO DO JAVASCRIPT
-// Adicionando escutador ao formulário
-document.getElementById('cpfForm').addEventListener('submit', function(event){
-    event.preventDefault();
- 
-    const cpf = document.getElementById('cpf').value;
-    const msg  = document.getElementById('message');
- 
-    if(validarCPF(cpf)){
-    msg.textContent = "O CPF é válido";
-    msg.style.color = 'green';
- 
-    }else{
-        msg.textContent = "O CPF é inválido";
-        msg.style.color = 'red';
-    }
- }
- );
- 
- // VALIDAÇÃO DE CPF DIRETO NO JAVASCRIPT
-  
- // Adicionando escutador ao formulário
- document.getElementById('cpfForm').addEventListener('submit', function(event){
-     event.preventDefault();
-  
-     const cpf = document.getElementById('cpf').value;
-     const msg = document.getElementById('message');
-  
-     if(validarCPF(cpf)){
-         msg.textContent = 'O CPF é válido!';
-         msg.style.color = 'green';
-     }else{
-         msg.textContent = 'O CPF é inválido!';
-         msg.style.color = 'red';
-     }
- }
- );
-  
- function validarCPF(cpf){
-     cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-  
-     // Estrutura de decisão para verificar quantidade de dígitos e se todos os digitos são iguais
-     if(cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)){
-         return false;
-     }
-    
-     let soma = 0;
-     let resto;
-  
-     // Validando o primeiro digito verificador
-     for(let i=1;i <= 9;i++){
-         soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
-     }
-  
-     resto = (soma * 10) % 11;
-  
-     if((resto === 10) || (resto === 11)){
-         resto = 0;
-     }
-     if(resto !== parseInt(cpf.substring(9, 10))){
-         return false;
-     }
-  
-     soma = 0;
-     // Validando o segundo digito verificador
-     for(let i = 1; i <= 10; i++){
-         soma += parseInt(cpf.substring(i-1, i) * (12 - i));
-     }
-  
-     resto = (soma * 10) % 11;
-  
-     if((resto === 10) || (resto === 11)){
-         resto = 0;
-     }
-    
-     if(resto !== parseInt(cpf.substring(10, 11))){
-         return false;
-     }
-  
-     return true;
- }
+}
+// Executa a ação de preenchimento do formulário ao deixar o campo do CEP
+document.getElementById('inputcep').addEventListener('focusout', pesquisarCep);
